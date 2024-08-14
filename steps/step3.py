@@ -17,6 +17,9 @@ import time as time
 import random
 import streamlit.components.v1 as components
 
+from svglib.svglib import svg2rlg
+from reportlab.graphics import renderPM
+
 
 def display_output():
     st.write('''
@@ -29,12 +32,17 @@ def display_output():
 
     for i in range(len(svg_images)):
 
+        svg_img = svg2rlg(svg_images[i])
+        png_img = renderPM.drawToFile(drawing, f'''{st.session_state.template_name}.png''', fmt="PNG")
+        
         components.html(f'''
             <body style="margin: 0; padding: 0;">
                 <svg viewBox="0 0 1480 700">{svg_images[i]}</svg>
             </body>
         ''', height=333)
 
+        st.image('png_img')
+        
         st.download_button(
             label="Download SVG image",
             data=svg_images[i],
