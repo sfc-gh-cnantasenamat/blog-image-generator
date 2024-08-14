@@ -20,7 +20,7 @@ import streamlit.components.v1 as components
 
 def display_output():
     st.write('''
-    ## Step 3: Download
+    ## Step 3: Downloads
     ''')
 
     svg_images = st.session_state.images
