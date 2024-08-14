@@ -43,5 +43,13 @@ def display_output():
             key= f"key_{str(random.randint(0, 100000000))}"
         )
 
+        st.download_button(
+            label="Download PNG image",
+            data=svg_images[i],
+            file_name=f'''{st.session_state.template_name}.png''',
+            mime="image/png",
+            key= f"key_{str(random.randint(0, 100000000))}"
+        )
+
         st.write('')
         st.write('')
