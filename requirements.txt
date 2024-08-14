@@ -1,3 +1,5 @@
 streamlit
 htbuilder
 Pillow==9.5.0
+svglib
+reportlab
