@@ -51,7 +51,7 @@ def display_output():
 
         # st.image(png_img)
 
-        col = st.columns(2)
+        col = st.columns(3)
 
         with col[0]:
             st.download_button(
