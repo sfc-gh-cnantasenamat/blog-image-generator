@@ -49,7 +49,7 @@ def display_output():
             </body>
         ''', height=333)
 
-        st.image(png_img)
+        # st.image(png_img)
         
         st.download_button(
             label="Download SVG image",
@@ -61,7 +61,7 @@ def display_output():
 
         st.download_button(
             label="Download PNG image",
-            data=svg_images[i],
+            data=png_img,
             file_name=f'''{st.session_state.template_name}.png''',
             mime="image/png",
             key= f"key_{str(random.randint(0, 100000000))}"
