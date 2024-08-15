@@ -17,9 +17,16 @@ import time as time
 import random
 import streamlit.components.v1 as components
 
-from svglib import svg2rlg
-from reportlab.graphics import renderPM
+import cairosvg
+from io import BytesIO
+from PIL import Image
 
+def convert_svg_to_png(svg_content, output=None):
+    if output:
+        cairosvg.svg2png(bytestring=svg_content, write_to=output)
+    else:
+        return cairosvg.svg2png(bytestring=svg_content)
+    
 
 def display_output():
     st.write('''
@@ -32,8 +39,9 @@ def display_output():
 
     for i in range(len(svg_images)):
 
-        svg_img = svg2rlg(svg_images[i])
-        png_img = renderPM.drawToFile(drawing, f'''{st.session_state.template_name}.png''', fmt="PNG")
+        # Convert and get bytes
+        png_data = convert_svg_to_png(svg_images[i])
+        png_img = Image.open(BytesIO(png_data))
         
         components.html(f'''
             <body style="margin: 0; padding: 0;">
@@ -41,7 +49,7 @@ def display_output():
             </body>
         ''', height=333)
 
-        st.image('png_img')
+        st.image(png_img)
         
         st.download_button(
             label="Download SVG image",
