@@ -50,22 +50,26 @@ def display_output():
         ''', height=333)
 
         # st.image(png_img)
-        
-        st.download_button(
-            label="Download SVG image",
-            data=svg_images[i],
-            file_name=f'''{st.session_state.template_name}.svg''',
-            mime="image/svg+xml",
-            key= f"key_{str(random.randint(0, 100000000))}"
-        )
 
-        st.download_button(
-            label="Download PNG image",
-            data=png_data,
-            file_name=f'''{st.session_state.template_name}.png''',
-            mime="image/png",
-            key= f"key_{str(random.randint(0, 100000000))}"
-        )
+        col = st.columns(2)
+
+        with col[0]:
+            st.download_button(
+                label="Download SVG image",
+                data=svg_images[i],
+                file_name=f'''{st.session_state.template_name}.svg''',
+                mime="image/svg+xml",
+                key= f"key_{str(random.randint(0, 100000000))}"
+            )
+
+        with col[1]:
+            st.download_button(
+                label="Download PNG image",
+                data=png_data,
+                file_name=f'''{st.session_state.template_name}.png''',
+                mime="image/png",
+                key= f"key_{str(random.randint(0, 100000000))}"
+            )
 
         st.write('')
         st.write('')
