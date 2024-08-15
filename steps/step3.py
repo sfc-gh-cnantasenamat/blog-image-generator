@@ -17,7 +17,7 @@ import time as time
 import random
 import streamlit.components.v1 as components
 
-from svglib.svglib import svg2rlg
+from svglib import svg2rlg
 from reportlab.graphics import renderPM
 
 
