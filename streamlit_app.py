@@ -17,6 +17,9 @@ from steps import step1
 from steps import step2
 from steps import step3
 
+from svglib.svglib import svg2rlg
+from reportlab.graphics import renderPM
+
 # Presentational content
 
 st.markdown('<div style="font-size: 4rem; margin-bottom: -3rem;">🎨</div>', unsafe_allow_html=True)
