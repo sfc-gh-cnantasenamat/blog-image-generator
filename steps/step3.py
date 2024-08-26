@@ -14,6 +14,7 @@
 
 import random
 import time as time
+from concurrent.futures import ThreadPoolExecutor
 from io import BytesIO
 
 import cairosvg
@@ -39,11 +40,21 @@ def convert_svg_to_webp(svg_data, output=None):
 
 @st.cache_data
 def generate_image_formats(first_image):
-    svg_images, png_images, webp_images = st.session_state['images'], [], []
+    svg_images = st.session_state['images']
+    png_images, webp_images = [], []
 
-    for i in range(len(svg_images)):
-        png_images.append(convert_svg_to_png(svg_images[i]))
-        webp_images.append(convert_svg_to_webp(svg_images[i]))
+    def process_image(svg_image):
+        png_image = convert_svg_to_png(svg_image)
+        webp_image = convert_svg_to_webp(svg_image)
+        return png_image, webp_image
+
+    with ThreadPoolExecutor() as executor:
+        results = list(executor.map(process_image, svg_images))
+    
+    for png_image, webp_image in results:
+        png_images.append(png_image)
+        webp_images.append(webp_image)
+    
     return svg_images, png_images, webp_images
 
     
